@@ -8,8 +8,9 @@ lock '3.4.0'
 # set :deploy_to, '/dpr2/apps/ingest33121/tomcat'
 set :scm, :hg
 
-set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", "mrt-storage-dev", "mrt-storage-stg", "mrt-storage-prd",
-	"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd"]
+set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
+		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
+		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd"]
 set :default_env, { path: "/dpr2/local/bin:$PATH" }
 
 # persistent dirs

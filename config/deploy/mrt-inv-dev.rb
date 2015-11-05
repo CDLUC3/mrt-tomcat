@@ -28,7 +28,7 @@ set :deploy_to, "/dpr2/apps/inv36121"
 set :tomcat_pid, "#{fetch(:deploy_to)}/tomcat.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtinv-dev", user: "dpr2", roles: %w{web app}
+server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
 
