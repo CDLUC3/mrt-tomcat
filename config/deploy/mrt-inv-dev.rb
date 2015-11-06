@@ -21,11 +21,11 @@ set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-inv-dev"
 
 set :application, "merritt-inv"
-set :build_url, "http://builds.cdlib.org/job/mrt-inv/lastSuccessfulBuild/artifact/inv-war/dev-dpr2/mrtinv.dev-dpr2.war"
+set :build_url, "http://builds.cdlib.org/job/mrt-inv/lastSuccessfulBuild/artifact/inv-war/aws-dev/mrtinv.aws-dev.war"
 set :target, "mrtinv.war"
 set :deploy_to, "/dpr2/apps/inv36121"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/tomcat.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/catalina.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
