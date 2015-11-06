@@ -25,7 +25,7 @@ set :build_url, "http://builds.cdlib.org/job/mrt-ingest-dev/lastSuccessfulBuild/
 set :target, "ingest.war"
 set :deploy_to, "/dpr2/apps/ingest33121"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/tomcat.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/ingest.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 server "uc3-mrtingest1-dev", user: "dpr2", roles: %w{web app}
