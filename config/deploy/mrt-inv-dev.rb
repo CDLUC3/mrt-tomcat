@@ -25,7 +25,7 @@ set :build_url, "http://builds.cdlib.org/job/mrt-inv/lastSuccessfulBuild/artifac
 set :target, "mrtinv.war"
 set :deploy_to, "/dpr2/apps/inv36121"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/catalina.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/inv.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
