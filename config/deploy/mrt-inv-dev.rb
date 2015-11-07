@@ -33,11 +33,10 @@ server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
 # custom
 
 namespace :custom do
-  desc 'Custom action`'
+  desc 'Custom action'
   task :custom_deploy_bits do
     on roles(:app) do
         puts "No custom actions"
-      end
     end
   end
 end
