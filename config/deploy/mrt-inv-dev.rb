@@ -28,15 +28,34 @@ set :deploy_to, "/dpr2/apps/inv36121"
 set :tomcat_pid, "#{fetch(:deploy_to)}/inv.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
+# server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
+server "uc3-mrtinv-dev.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
-
 namespace :custom do
-  desc 'Custom action'
-  task :custom_deploy_bits do
+
+  desc 'Custom deploy action'
+  task :deploy_bits do
     on roles(:app) do
-        puts "No custom actions"
+        puts "No custom deploy_bits actions"
+    end
+  end
+
+  desc 'Custom pre-stop action'
+  task :prestop do
+    on roles(:app) do
+        puts "Shutdown Inventory Application"
+        execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/stop?t=xml"
+        execute "sleep 5"
+    end
+  end
+
+  desc 'Custom post-start action'
+  task :poststart do
+    on roles(:app) do
+        puts "Startup Inventory Application"
+        execute "sleep 5"
+        execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/start?t=xml"
     end
   end
 end

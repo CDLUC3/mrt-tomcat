@@ -34,8 +34,8 @@ server "uc3-mrtingest1-dev", user: "dpr2", roles: %w{web app}
 set :ingestqueue, "/dpr2/ingest_home"
 
 namespace :custom do
-  desc 'Custom action`'
-  task :custom_deploy_bits do
+  desc 'Custom deploy action`'
+  task :deploy_bits do
     on roles(:app) do
       if (fetch(:ingestqueue))
         puts "Create ingestqueue link in webapps"

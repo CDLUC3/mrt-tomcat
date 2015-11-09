@@ -39,6 +39,7 @@ namespace :deploy do
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
       if test("[ -f #{fetch(:tomcat_pid)} ]")
+        invoke 'custom:prestop'
         execute "cd #{fetch(:deploy_to)}/tomcat; /bin/sh ./bin/stop"
       end
     end
@@ -48,6 +49,7 @@ namespace :deploy do
   task :start do
     on roles(:app), wait: 10 do
       execute "cd #{fetch(:deploy_to)}/tomcat; /bin/sh ./bin/start"
+      invoke 'custom:poststart'
     end
   end
 
@@ -67,11 +69,7 @@ namespace :deploy do
     on roles(:app) do
       execute "cd #{fetch(:deploy_to)}"
       execute "[ ! -f #{fetch(:deploy_to)}/current/webapps ] && mkdir -p #{fetch(:deploy_to)}/current/webapps;"
-      #if (fetch(:ingestqueue))
-        #puts "Create ingestqueue link in webapps"
-        #execute "cd #{deploy_to}/current/webapps/; ln -s #{fetch(:ingestqueue)} ingestqueue;"
-      #end
-      invoke 'custom:custom_deploy_bits'
+      invoke 'custom:deploy_bits'
       execute "mv -f #{fetch(:tmp_dir)}/#{fetch(:target)} #{fetch(:deploy_to)}/current/webapps || exit 1;"
     end
   end
