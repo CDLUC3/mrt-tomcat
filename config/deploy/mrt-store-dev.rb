@@ -29,7 +29,7 @@ set :tomcat_pid, "#{fetch(:deploy_to)}/storage.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 # additional directories needed by storage
-set :linked_dirs, %w{webapps/async webapps/container}
+set :linked_dirs, fetch(:linked_dirs).push("webapps/async", "webapps/container")
 
 # server "mrt-inv-aws-dev.cdlib.org", user: "dpr2", roles: %w{web app}
 server "uc3-mrtstore2-dev.cdlib.org", user: "dpr2store", roles: %w{web app}
