@@ -23,7 +23,7 @@ set :branch, "mrt-store-dev"
 set :application, "merritt-store"
 set :build_url, "http://builds.cdlib.org/job/mrt-storeCloud%20(default)/226/artifact/store-war/vm-dev/storage.vm-dev.war"
 set :target, "storage.war"
-set :deploy_to, "/dpr2/apps/storage35121"
+set :deploy_to, "/dpr2store/apps/storage35121"
 
 set :tomcat_pid, "#{fetch(:deploy_to)}/storage.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
