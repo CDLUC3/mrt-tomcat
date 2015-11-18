@@ -1,3 +1,5 @@
 
+Check out from Mercurial repo: http://hg.cdlib.org/mrt-tomcat
 
-cap mrt-ingest-local deploy
+Usage: cap <target> <action>
+e.g.   cap mrt-ingest-local deploy:stop

@@ -53,6 +53,15 @@ namespace :deploy do
     end
   end
 
+  desc 'Status Tomcat'
+  task :status do
+    on roles(:app) do
+      if test("[ -f #{fetch(:tomcat_pid)} ]")
+        execute "cd #{fetch(:deploy_to)}/current; cat #{fetch(:unicorn_pid)} | xargs ps -lp"
+      end
+    end
+  end
+
   desc 'Download Tomcat'
   task :download_bits do
     on roles(:app) do
