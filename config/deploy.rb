@@ -57,7 +57,7 @@ namespace :deploy do
   task :status do
     on roles(:app) do
       if test("[ -f #{fetch(:tomcat_pid)} ]")
-        execute "cd #{fetch(:deploy_to)}/current; cat #{fetch(:unicorn_pid)} | xargs ps -lp"
+        execute "cd #{fetch(:deploy_to)}/current; cat #{fetch(:tomcat_pid)} | xargs ps -lp"
       end
     end
   end
