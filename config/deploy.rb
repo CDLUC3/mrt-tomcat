@@ -68,7 +68,7 @@ namespace :deploy do
       execute "cd #{fetch(:deploy_to)}"
       # execute "[ -f #{fetch(:tmp_dir)}/#{fetch(:target)} ] && rm -f #{deploy_to}/temp/#{fetch(:target});"
       set :build_url, ask('Enter Jenkins artifact URL: ', 'http://builds.cdlib.org/...') unless fetch(:build_url)
-      execute "curl --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} #{fetch(:build_url)} || exit 1;"
+      execute "curl --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} '#{fetch(:build_url)}' || exit 1;"
     end
   end
   after "deploy", "deploy:download_bits"
