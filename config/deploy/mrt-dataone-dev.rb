@@ -25,7 +25,7 @@ set :build_url, "http://builds.cdlib.org/job/mrt-metacat-dev/lastSuccessfulBuild
 set :target, "knb.war"
 set :deploy_to, "/dataone/apps/metacat33181"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/inv.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/metacat.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 # Custom for "dataone" role
