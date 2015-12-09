@@ -41,7 +41,7 @@ namespace :custom do
   desc 'Custom deploy action`'
   task :deploy_bits do
     on roles(:app) do
-      if (fetch(:ingestqueue))
+      if (fetch(:feederout))
         puts "Create feederout directory in webapps"
         execute "cd #{fetch(:deploy_to)}/current/webapps/; mkdir #{fetch(:feederout)};"
       end
