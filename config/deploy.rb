@@ -10,7 +10,8 @@ set :scm, :hg
 
 set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
 		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
-		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd"]
+		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd",
+                "mrt-replic-dev"]
 set :default_env, { path: "/dpr2/local/bin:$PATH" }
 
 # persistent dirs
