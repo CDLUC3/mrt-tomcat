@@ -23,7 +23,7 @@ set :branch, "mrt-audit-stg"
 set :application, "merritt-audit"
 set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-audit-default/ws/audit-war/vm-stg/mrtaudit.vm-stg.war"
 
-set :target, "mrtausit.war"
+set :target, "mrtaudit.war"
 set :deploy_to, "/dpr2/apps/audit37001"
 
 set :tomcat_pid, "#{fetch(:deploy_to)}/audit.pid"
