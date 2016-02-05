@@ -38,7 +38,6 @@ namespace :custom do
   task :deploy_bits do
     on roles(:app) do
         puts "No custom deploy_bits action"
-      end
     end
   end
 
