@@ -51,14 +51,14 @@ namespace :custom do
   desc 'Custom pre-stop action'
   task :prestop do
     on roles(:app) do
-        puts "No custom pre-stop sctions"
+        puts "No custom pre-stop actions"
     end
   end
 
   desc 'Custom post-start action'
   task :poststart do
     on roles(:app) do
-        puts "No custom post-start sctions"
+        puts "No custom post-start actions"
     end
   end
 
