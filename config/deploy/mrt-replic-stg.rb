@@ -32,7 +32,7 @@ set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 # additional directories needed by storage
 set :linked_dirs, fetch(:linked_dirs).push("curl")
 
-server "replic01-aws-stg.cdlib.org", user: "dpr2", roles: %w{web app}
+server "replic-aws-stg.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
 namespace :custom do
