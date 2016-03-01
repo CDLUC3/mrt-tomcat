@@ -14,11 +14,11 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-node01-prd"
+set :rails_env, "mrt-node02-prd"
 
-puts "----- mrt-node01-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-node02-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
-set :branch, "mrt-node01-prd"
+set :branch, "mrt-node02-prd"
 
 set :application, "merritt-node"
 # Do not define, Capistrano will prompt at build time
@@ -29,7 +29,7 @@ set :deploy_to, "/dpr2/apps/node35801"
 set :tomcat_pid, "#{fetch(:deploy_to)}/node.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "replic01-aws.cdlib.org", user: "dpr2", roles: %w{web app}
+server "replic02-aws.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
 namespace :custom do

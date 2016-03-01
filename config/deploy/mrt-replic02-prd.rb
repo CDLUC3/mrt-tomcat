@@ -14,22 +14,25 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-node01-prd"
+set :rails_env, "mrt-replic02-prd"
 
-puts "----- mrt-node01-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-replic02-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
-set :branch, "mrt-node01-prd"
+set :branch, "mrt-replic02-prd"
 
-set :application, "merritt-node"
+set :application, "merritt-replic"
 # Do not define, Capistrano will prompt at build time
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-node%20(default)/ws/node-war-uc3/node-8001-prod-aws/mrt-node.node-8001-prod-aws.war"
-set :target, "mrt-node.war"
-set :deploy_to, "/dpr2/apps/node35801"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-replication/ws/replic-war/vm-prod/mrtreplic.vm-prod.war"
+set :target, "mrtreplic.war"
+set :deploy_to, "/dpr2/apps/replic38001"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/node.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/replic.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "replic01-aws.cdlib.org", user: "dpr2", roles: %w{web app}
+# additional directories needed by storage
+set :linked_dirs, fetch(:linked_dirs).push("curl")
+
+server "replic02-aws.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
 namespace :custom do
@@ -44,14 +47,18 @@ namespace :custom do
   desc 'Custom pre-stop action'
   task :prestop do
     on roles(:app) do
-        puts "No pre-stop Node action"
+        puts "Shutdown Replication Application"
+        execute "/usr/bin/curl --max-time 1800 --silent -X POST http://localhost:38001/mrtreplic/service/shutdown?t=xml"
+        execute "sleep 30"
     end
   end
 
   desc 'Custom post-start action'
   task :poststart do
     on roles(:app) do
-        puts "No post-start Node action"
+        puts "Startup Replication Application"
+        execute "sleep 30"
+        execute "/usr/bin/curl --max-time 1800 --silent -X POST http://localhost:38001/mrtreplic/service/start?t=xml"
     end
   end
 end

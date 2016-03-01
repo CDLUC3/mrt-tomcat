@@ -14,9 +14,9 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-replic-prd"
+set :rails_env, "mrt-replic01-prd"
 
-puts "----- mrt-replic-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-replic01-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-replic01-prd"
 
