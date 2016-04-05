@@ -14,11 +14,11 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-store-stg"
+set :rails_env, "mrt-store01-stg"
 
-puts "----- mrt-store-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-store01-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
-set :branch, "mrt-store-stg"
+set :branch, "mrt-store01-stg"
 
 set :application, "merritt-store"
 # Do not define, Capistrano will prompt at build time
@@ -34,7 +34,7 @@ set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 set :linked_dirs, fetch(:linked_dirs).push("webapps/async", "webapps/container")
 
 # server "mrt-inv-aws-stg.cdlib.org", user: "dpr2", roles: %w{web app}
-server "uc3-mrtstore2-stg.cdlib.org", user: "dpr2store", roles: %w{web app}
+server "uc3-mrtstore-stg.cdlib.org", user: "dpr2store", roles: %w{web app}
 
 # custom
 namespace :custom do
