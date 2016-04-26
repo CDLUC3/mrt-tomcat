@@ -14,11 +14,11 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-inv-stg"
+set :rails_env, "mrt-inv02-stg"
 
 puts "----- mrt-inv-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
-set :branch, "mrt-inv-stg"
+set :branch, "mrt-inv02-stg"
 
 set :application, "merritt-inv"
 # Define URL for parameter "vm-dev".  MUST build prior to deployment to ensure that URL is active
@@ -31,7 +31,7 @@ set :tomcat_pid, "#{fetch(:deploy_to)}/inv.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 # server "mrt-inv-aws-stg.cdlib.org", user: "dpr2", roles: %w{web app}
-server "uc3-mrtinv-stg.cdlib.org", user: "dpr2", roles: %w{web app}
+server "uc3-mrtinv2-stg.cdlib.org", user: "dpr2", roles: %w{web app}
 
 # custom
 namespace :custom do
