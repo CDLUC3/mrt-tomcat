@@ -14,23 +14,26 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-inv-prd"
+set :rails_env, "mrt-store-prd"
 
-puts "----- mrt-inv-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-store-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
 set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
-set :branch, "mrt-inv-prd"
+set :branch, "mrt-store01-prd"
 
-set :application, "merritt-inv"
-# Define URL for parameter "vm-dev".  MUST build prior to deployment to ensure that URL is active
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-inv/ws/inv-war/vm-prod/mrtinv.vm-prod.war"
+set :application, "merritt-store"
+# Do not define, Capistrano will prompt at build time
+set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-storeCloud%20(default)/ws/store-war/vm-prod/storage.vm-prod.war"
 
-set :target, "mrtinv.war"
-set :deploy_to, "/dpr2/apps/inv36121"
+set :target, "storage.war"
+set :deploy_to, "/dpr2store/apps/storage35121"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/inv.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/storage.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtinv-prd.cdlib.org", user: "dpr2", roles: %w{web app}
+# additional directories needed by storage
+set :linked_dirs, fetch(:linked_dirs).push("webapps/container")
+
+server "uc3-mrtstore1-prd.cdlib.org", user: "dpr2store", roles: %w{web app}
 
 # custom
 namespace :custom do
@@ -45,18 +48,14 @@ namespace :custom do
   desc 'Custom pre-stop action'
   task :prestop do
     on roles(:app) do
-        puts "Shutdown Inventory Application"
-        execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/stop?t=xml"
-        execute "sleep 5"
+        puts "No custom prestop action"
     end
   end
 
   desc 'Custom post-start action'
   task :poststart do
     on roles(:app) do
-        puts "Startup Inventory Application"
-        execute "sleep 5"
-        execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/start?t=xml"
+        puts "No custom poststart action"
     end
   end
 end
