@@ -49,7 +49,7 @@ namespace :custom do
     on roles(:app) do
         puts "Shutdown Replication Application"
         execute "/usr/bin/curl --max-time 1800 --silent -X POST http://localhost:38001/mrtreplic/service/shutdown?t=xml"
-        execute "sleep 30"
+        execute "sleep 60"
     end
   end
 
@@ -57,7 +57,7 @@ namespace :custom do
   task :poststart do
     on roles(:app) do
         puts "Startup Replication Application"
-        execute "sleep 30"
+        execute "sleep 60"
         execute "/usr/bin/curl --max-time 1800 --silent -X POST http://localhost:38001/mrtreplic/service/start?t=xml"
     end
   end
