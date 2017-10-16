@@ -42,7 +42,9 @@ namespace :custom do
   desc 'Custom deploy action'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits actions"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-store/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2store/apps/storage35121/version"
+
     end
   end
 
@@ -56,8 +58,7 @@ namespace :custom do
   desc 'Custom post-start action'
   task :poststart do
     on roles(:app) do
-        puts "Add source code version to Tomcat directory
-        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-store/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> ${HOME}/apps/storage35121/version"
+        puts "No custom poststart action"
     end
   end
 end
