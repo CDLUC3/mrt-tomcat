@@ -22,7 +22,7 @@ set :branch, "mrt-store-dev"
 
 set :application, "merritt-store"
 # Do not define, Capistrano will prompt at build time
-set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/storage.war"
+set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/dev/storage.war"
 
 set :target, "storage.war"
 set :deploy_to, "/dpr2store/apps/storage35121"
