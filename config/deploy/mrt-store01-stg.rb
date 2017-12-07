@@ -22,7 +22,7 @@ set :branch, "mrt-store01-stg"
 
 set :application, "merritt-store"
 # Do not define, Capistrano will prompt at build time
-set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-storeCloud%20(default)/ws/store-war/vm-stg/storage.vm-stg.war"
+set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/stage/storage.war"
 
 set :target, "storage.war"
 set :deploy_to, "/dpr2store/apps/storage35121"
@@ -42,7 +42,8 @@ namespace :custom do
   desc 'Custom deploy action'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits actions"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-store/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2store/apps/storage35121/version"
     end
   end
 
