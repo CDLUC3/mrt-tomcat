@@ -22,7 +22,7 @@ set :branch, "mrt-inv02-stg"
 
 set :application, "merritt-inv"
 # Define URL for parameter "vm-dev".  MUST build prior to deployment to ensure that URL is active
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-inv/ws/inv-war/vm-stg/mrtinv.vm-stg.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-inv/ws/inv-war/war/stage/mrtinv.war"
 
 set :target, "mrtinv.war"
 set :deploy_to, "/dpr2/apps/inv36121"
@@ -39,7 +39,8 @@ namespace :custom do
   desc 'Custom deploy action'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits actions"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-inventory/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/inv36121/version"
     end
   end
 
