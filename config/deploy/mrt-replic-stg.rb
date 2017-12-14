@@ -22,7 +22,7 @@ set :branch, "mrt-replic-stg"
 
 set :application, "merritt-replic"
 # Do not define, Capistrano will prompt at build time
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-replication/ws/replic-war/vm-stg/mrtreplic.vm-stg.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-replic/ws/replication-war/war/stage/mrtreplic.war" 
 set :target, "mrtreplic.war"
 set :deploy_to, "/dpr2/apps/replic38001"
 
@@ -40,7 +40,8 @@ namespace :custom do
   desc 'Custom deploy action'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits actions"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-replic/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/replic38001/version"
     end
   end
 
