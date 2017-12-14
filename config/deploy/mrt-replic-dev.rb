@@ -22,7 +22,7 @@ set :branch, "mrt-replic-dev"
 
 set :application, "merritt-replic"
 # Do not define, Capistrano will prompt at build time
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-replic/ws/replication-war/war/test/mrtreplic.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-replic/ws/replication-war/war/dev/mrtreplic.war"
 set :target, "mrtreplic.war"
 set :deploy_to, "/dpr2/apps/replic38001"
 
