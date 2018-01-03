@@ -21,7 +21,7 @@ set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-audit01-prd"
 
 set :application, "merritt-audit"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-audit-default/ws/audit-war/vm-prod/mrtaudit.vm-prod.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-audit/ws/audit-war/war/prod/mrtaudit.war"
 
 set :target, "mrtaudit.war"
 set :deploy_to, "/dpr2/apps/audit37001"
@@ -35,7 +35,8 @@ namespace :custom do
   desc 'Custom deploy action`'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits action"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-audit/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/audit37001/version"
     end
   end
 
