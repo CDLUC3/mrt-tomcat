@@ -43,7 +43,6 @@ namespace :custom do
         puts "Add source code version to Tomcat directory"
         execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-replic/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/replic38001/version"
     end
-    end
   end
 
   desc 'Custom pre-stop action'
