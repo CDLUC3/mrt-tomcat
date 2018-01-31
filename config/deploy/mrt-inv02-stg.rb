@@ -49,7 +49,7 @@ namespace :custom do
     on roles(:app) do
         puts "Shutdown Inventory Application"
         execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/stop?t=xml"
-        execute "sleep 5"
+        execute "sleep 30"
     end
   end
 
@@ -57,7 +57,7 @@ namespace :custom do
   task :poststart do
     on roles(:app) do
         puts "Startup Inventory Application"
-        execute "sleep 5"
+        execute "sleep 30"
         execute "/usr/bin/curl --silent -X POST http://localhost:36121/mrtinv/service/start?t=xml"
     end
   end
