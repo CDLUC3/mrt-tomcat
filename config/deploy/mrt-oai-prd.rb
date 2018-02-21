@@ -21,7 +21,7 @@ set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-oai-prd"
 
 set :application, "merritt-oai"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-oai/ws/oai-war/vm-prod/mrtoai.vm-prod.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/stage/mrtoai.war"
 set :target, "mrtoai.war"
 set :deploy_to, "/dpr2/apps/oai37001"
 
@@ -37,7 +37,8 @@ namespace :custom do
   desc 'Custom deploy action`'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits action"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-oai/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /apps/dpr2/apps/oai37001/tomcat/version"
     end
   end
 
