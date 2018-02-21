@@ -21,7 +21,7 @@ set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-sword-prd"
 
 set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-sword/ws/sword-war/vm-prod/mrtsword.vm-prod.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/stage/mrtsword.war"
 set :target, "mrtsword.war"
 set :deploy_to, "/dpr2/apps/sword39001"
 
@@ -37,7 +37,8 @@ namespace :custom do
   desc 'Custom deploy action`'
   task :deploy_bits do
     on roles(:app) do
-        puts "No custom deploy_bits action"
+        puts "Add source code version to Tomcat directory"
+        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-sword/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/sword39001/version"
     end
   end
 
