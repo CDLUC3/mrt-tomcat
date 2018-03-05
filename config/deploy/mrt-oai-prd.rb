@@ -21,7 +21,7 @@ set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
 set :branch, "mrt-oai-prd"
 
 set :application, "merritt-oai"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/stage/mrtoai.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/prod/mrtoai.war"
 set :target, "mrtoai.war"
 set :deploy_to, "/dpr2/apps/oai37001"
 
