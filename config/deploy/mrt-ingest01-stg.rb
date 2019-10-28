@@ -16,7 +16,7 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-ingest01-stg"
 
-puts "----- mrt-ingest01-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
+puts "----- mrt-ingest01-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-ingest01-stg"
 

@@ -16,8 +16,8 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-audit03-prd"
 
-puts "----- mrt-audit03-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
-set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
+puts "----- mrt-audit03-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-audit03-prd"
 
 set :application, "merritt-audit"

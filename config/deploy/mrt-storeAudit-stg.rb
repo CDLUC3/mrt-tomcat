@@ -16,8 +16,8 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-storeAudit-stg"
 
-puts "----- mrt-storeAudit-stg branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
-set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
+puts "----- mrt-storeAudit-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-storeAudit-stg"
 
 set :application, "merritt-storeAudit"

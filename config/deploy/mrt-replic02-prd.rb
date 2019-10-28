@@ -16,8 +16,8 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-replic02-prd"
 
-puts "----- mrt-replic02-prd branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
-set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
+puts "----- mrt-replic02-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-replic02-prd"
 
 set :application, "merritt-replic"

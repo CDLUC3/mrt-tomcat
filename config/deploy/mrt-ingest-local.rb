@@ -16,8 +16,8 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-ingest-local"
 
-puts "----- mrt-ingest-local** branch of https://hg.cdlib.org/tomcat8_catalina_base -----"
-set :repo_url, "https://hg.cdlib.org/tomcat8_catalina_base"
+puts "----- mrt-ingest-local** branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-ingest-local"
 
 set :application, "merritt-ingest"
