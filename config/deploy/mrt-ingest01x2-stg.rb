@@ -28,7 +28,7 @@ set :deploy_to, "/dpr2/apps/ingest33121"
 set :tomcat_pid, "#{fetch(:deploy_to)}/ingest.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-ingest01-stg", user: "dpr2", roles: %w{web app}
+server "uc3-ingest01x2-stg", user: "dpr2", roles: %w{web app}
 
 # custom
 set :ingestqueue, "/apps/ingest-stg-shared/ingest_home/queue"
