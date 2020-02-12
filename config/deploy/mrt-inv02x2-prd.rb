@@ -22,7 +22,7 @@ set :branch, "mrt-inv02x2-prd"
 
 set :application, "merritt-inv"
 # Define URL for parameter "vm-dev".  MUST build prior to deployment to ensure that URL is active
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-inv/ws/inv-war/war/stage/mrtinv.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-inv/ws/inv-war/war/prod/mrtinv.war"
 
 set :target, "mrtinv.war"
 set :deploy_to, "/dpr2/apps/inv36121"
