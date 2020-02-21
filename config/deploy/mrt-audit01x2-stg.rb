@@ -14,9 +14,9 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-audit-stg"
+set :rails_env, "mrt-audit01x2-stg"
 
-puts "----- mrt-audit-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+puts "----- mrt-audit01x2-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-audit01x2-stg"
 
@@ -29,7 +29,7 @@ set :deploy_to, "/dpr2/apps/audit37001"
 set :tomcat_pid, "#{fetch(:deploy_to)}/audit.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtaudit-stg", user: "dpr2", roles: %w{web app}
+server "uc3-mrtaudit01x2-stg", user: "dpr2", roles: %w{web app}
 
 namespace :custom do
   desc 'Custom deploy action`'
