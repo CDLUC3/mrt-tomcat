@@ -29,7 +29,7 @@ set :deploy_to, "/dpr2/apps/audit37001"
 set :tomcat_pid, "#{fetch(:deploy_to)}/audit.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtaudit1-prd", user: "dpr2", roles: %w{web app}
+server "uc3-mrtaudit01x2-prd", user: "dpr2", roles: %w{web app}
 
 namespace :custom do
   desc 'Custom deploy action`'
