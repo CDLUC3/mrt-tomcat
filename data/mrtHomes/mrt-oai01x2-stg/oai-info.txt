@@ -9,4 +9,4 @@ maxListIdentifiers: 10000
 maxListRecords: 10000
 maxListSets: 100
 name:UC3
-identifier: uc3-mrtoai01x2-stg.cdlib.org
+identifier: mrtoai-stg.cdlib.org

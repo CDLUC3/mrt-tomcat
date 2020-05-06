@@ -24,16 +24,16 @@ set :application, "merritt-oai"
 set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/stage/mrtoai.war"
 set :target, "mrtoai.war"
 set :deploy_to, "/dpr2/apps/oai37001"
-set :mrtHomes, "/dpr2/mrtHomes/oai"
-set :info_file, "oai-info.txt"
 
 set :tomcat_pid, "#{fetch(:deploy_to)}/oai.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtoai01x2-stg", user: "dpr2", roles: %w{web app}
+set :mrtHomes, "/dpr2/mrtHomes/oai"
+set :info_file, "oai-info.txt"
+set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
 
-# custom
-set :ingestqueue, "/dpr2/ingest_home/queue"
+server "uc3-mrtoai01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
+
 
 namespace :custom do
   desc 'Custom deploy action`'
@@ -57,14 +57,5 @@ namespace :custom do
         puts "No custom post-start actions"
     end
   end
-
-  desc 'Initial mrtHomes setup'
-  task :init_mrtHomes do
-    on roles(:app) do
-      execute "[ -d #{fetch(:mrtHomes)}/log ] || mkdir -p #{fetch(:mrtHomes)}/log;"
-      upload!  "config/info_files/#{fetch(:info_file)}", "#{fetch(:mrtHomes)}/#{fetch(:info_file)}"
-    end
-  end
-
 
 end
