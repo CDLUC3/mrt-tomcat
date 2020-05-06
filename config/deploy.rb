@@ -92,16 +92,16 @@ namespace :deploy do
   task :init_deploy do
     on roles(:app) do
       execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
-      execute "[ ! -f #{fetch(:deploy_to)} ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+      execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
     end
   end
 
-  desc 'Initial Deploy mrtHomes'
-  task :init_deploy do
-    on roles(:app) do
-      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
-      execute "[ ! -f #{fetch(:deploy_to)} ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
-    end
-  end
+  #desc 'Initial Deploy mrtHomes'
+  #task :init_deploy do
+  #  on roles(:app) do
+  #    execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
+  #    execute "[ ! -f #{fetch(:deploy_to)} ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+  #  end
+  #end
 
 end
