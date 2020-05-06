@@ -81,6 +81,7 @@ namespace :deploy do
       execute "cd #{fetch(:deploy_to)}"
       execute "[ ! -f #{fetch(:deploy_to)}/current/webapps ] && mkdir -p #{fetch(:deploy_to)}/current/webapps;"
       invoke 'custom:deploy_bits'
+      invoke 'custom:init_mrtHomes'
       execute "mv -f #{fetch(:tmp_dir)}/#{fetch(:target)} #{fetch(:deploy_to)}/current/webapps || exit 1;"
     end
   end
@@ -88,6 +89,14 @@ namespace :deploy do
   before "deploy:deploy_bits", "init_deploy"
 
   desc 'Initial Deploy Tomcat'
+  task :init_deploy do
+    on roles(:app) do
+      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
+      execute "[ ! -f #{fetch(:deploy_to)} ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+    end
+  end
+
+  desc 'Initial Deploy mrtHomes'
   task :init_deploy do
     on roles(:app) do
       execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"

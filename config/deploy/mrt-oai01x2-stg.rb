@@ -24,6 +24,7 @@ set :application, "merritt-oai"
 set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/stage/mrtoai.war"
 set :target, "mrtoai.war"
 set :deploy_to, "/dpr2/apps/oai37001"
+set :mrtHomes, "/dpr2/mrtHomes/oai"
 
 set :tomcat_pid, "#{fetch(:deploy_to)}/oai.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
@@ -55,5 +56,14 @@ namespace :custom do
         puts "No custom post-start actions"
     end
   end
+
+  desc 'Initial mrtHomes setup'
+  task :init_mrtHomes do
+    on roles(:app) do
+      execute "[ ! -f #{fetch(:mrtHomes)} ] && mkdir -p #{fetch(:mrtHomes)};"
+      execute "[ ! -f #{fetch(:mrtHomes)}/log ] mkdir #{fetch(:mrtHomes)}/log;"
+    end
+  end
+
 
 end
