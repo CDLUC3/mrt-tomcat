@@ -28,10 +28,12 @@ set :deploy_to, "/dpr2/apps/sword39001"
 set :tomcat_pid, "#{fetch(:deploy_to)}/sword.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app}
+set :mrtHomes, "/dpr2/mrtHomes/sword"
+set :info_file, "sword-info.txt"
+set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
+set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
+server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
 
-# custom
-set :ingestqueue, "/dpr2/ingest_home/queue"
 
 namespace :custom do
   desc 'Custom deploy action`'

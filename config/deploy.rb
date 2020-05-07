@@ -102,7 +102,9 @@ namespace :deploy do
   task :init_mrtHomes do
     on roles(:mrtHomes) do
       execute "[ -d #{fetch(:mrtHomes)}/log ] || mkdir -p #{fetch(:mrtHomes)}/log;"
-      upload!  "#{fetch(:mrtHomes_data)}/#{fetch(:info_file)}", "#{fetch(:mrtHomes)}/"
+      fetch(:mrtHomes_files).each do |file|
+        upload!  "#{fetch(:mrtHomes_data)}/#{file}", "#{fetch(:mrtHomes)}/"
+      end
     end
   end
 

@@ -29,7 +29,7 @@ set :tomcat_pid, "#{fetch(:deploy_to)}/oai.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
 set :mrtHomes, "/dpr2/mrtHomes/oai"
-set :info_file, "oai-info.txt"
+set :mrtHomes_files, ["oai-info.txt"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
 
 server "uc3-mrtoai01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
