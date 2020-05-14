@@ -21,7 +21,7 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-sword01x2-prd"
 
 set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/prd/mrtsword.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/prod/mrtsword.war"
 set :target, "mrtsword.war"
 set :deploy_to, "/dpr2/apps/sword39001"
 
