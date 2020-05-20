@@ -1,0 +1,6 @@
+/dpr2store/repository/node5001AWS
+/dpr2store/repository/node6001AWS
+/dpr2store/repository/node4001UNM
+/dpr2store/repository/node3041Dryad
+/dpr2store/repository/node9501Minio
+/dpr2store/repository/node2001Wasabi
