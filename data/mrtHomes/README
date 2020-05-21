@@ -1,0 +1,20 @@
+Staging area for  per mirco-service xxx-info.txt file or other data to be
+uploaded to ~/mrtHomes directory on remote hosts.  Place staged data into
+directory named for the $RAILS_ENV of the remote host.
+
+example:
+
+RAILS_ENV=mrt-sword01x2-prd
+MRTHOMES_DIR=~/tools/deploy/mrt-tomcat/data/mrtHomes/$RAILS_ENV
+LINUX1_HOST=uc3-mrtsword-prd
+MICRO_SERVICE=sword
+
+mkdir $MRTHOMES_DIR
+scp agould@${LINUX1_HOST}:/dpr2/mrtHomes/$MICRO_SERVICE/$MICRO_SERVICE-info.txt $MRTHOMES_DIR
+scp agould@${LINUX1_HOST}:/dpr2/mrtHomes/$MICRO_SERVICE/jssecacert $MRTHOMES_DIR
+
+find $MRTHOMES_DIR
+/apps/dpr2/tools/deploy/mrt-tomcat/data/mrtHomes/mrt-sword01x2-prd
+/apps/dpr2/tools/deploy/mrt-tomcat/data/mrtHomes/mrt-sword01x2-prd/sword-info.txt
+/apps/dpr2/tools/deploy/mrt-tomcat/data/mrtHomes/mrt-sword01x2-prd/jssecacert
+

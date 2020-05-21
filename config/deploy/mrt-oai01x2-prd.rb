@@ -14,25 +14,25 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-sword01x2-stg"
+set :rails_env, "mrt-oai01x2-prd"
 
-puts "----- mrt-sword01x2-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+puts "----- mrt-oai01x2-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
-set :branch, "mrt-sword01x2-stg"
+set :branch, "mrt-oai01x2-prd"
 
-set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/stage/mrtsword.war"
-set :target, "mrtsword.war"
-set :deploy_to, "/dpr2/apps/sword39001"
+set :application, "merritt-oai"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/prod/mrtoai.war"
+set :target, "mrtoai.war"
+set :deploy_to, "/dpr2/apps/oai37001"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/sword.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/oai.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-set :mrtHomes, "/dpr2/mrtHomes/sword"
-set :info_file, "sword-info.txt"
-set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
+set :mrtHomes, "/dpr2/mrtHomes/oai"
+set :mrtHomes_files, ["oai-info.txt"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
-server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
+
+server "uc3-mrtoai01x2-prd", user: "dpr2", roles: %w{web app mrtHomes}
 
 
 namespace :custom do
@@ -40,7 +40,7 @@ namespace :custom do
   task :deploy_bits do
     on roles(:app) do
         puts "Add source code version to Tomcat directory"
-        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-sword/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/sword39001/version"
+        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-oai/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /apps/dpr2/apps/oai37001/tomcat/version"
     end
   end
 

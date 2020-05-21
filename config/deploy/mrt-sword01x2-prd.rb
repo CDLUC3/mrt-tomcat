@@ -14,14 +14,14 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-sword01x2-stg"
+set :rails_env, "mrt-sword01x2-prd"
 
-puts "----- mrt-sword01x2-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+puts "----- mrt-sword01x2-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
-set :branch, "mrt-sword01x2-stg"
+set :branch, "mrt-sword01x2-prd"
 
 set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/stage/mrtsword.war"
+set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/prod/mrtsword.war"
 set :target, "mrtsword.war"
 set :deploy_to, "/dpr2/apps/sword39001"
 
@@ -32,7 +32,7 @@ set :mrtHomes, "/dpr2/mrtHomes/sword"
 set :info_file, "sword-info.txt"
 set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
-server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
+server "uc3-mrtsword01x2-prd", user: "dpr2", roles: %w{web app mrtHomes}
 
 
 namespace :custom do

@@ -91,7 +91,20 @@ namespace :deploy do
   task :init_deploy do
     on roles(:app) do
       execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
-      execute "[ ! -f #{fetch(:deploy_to)} ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+      execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+      invoke "deploy:init_mrtHomes"
+    end
+  end
+
+  # eventually this will be part of the 'apps' role. but currently only
+  # a few servers are set up for this. (ag 20200506)
+  desc 'Initial mrtHomes setup'
+  task :init_mrtHomes do
+    on roles(:mrtHomes) do
+      execute "[ -d #{fetch(:mrtHomes)}/log ] || mkdir -p #{fetch(:mrtHomes)}/log;"
+      fetch(:mrtHomes_files).each do |file|
+        upload!  "#{fetch(:mrtHomes_data)}/#{file}", "#{fetch(:mrtHomes)}/"
+      end
     end
   end
 

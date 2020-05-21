@@ -14,48 +14,52 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-sword01x2-stg"
+set :rails_env, "mrt-store02x2-prd"
 
-puts "----- mrt-sword01x2-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+puts "----- mrt-store02x2-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
-set :branch, "mrt-sword01x2-stg"
+set :branch, "mrt-store02x2-prd"
 
-set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/stage/mrtsword.war"
-set :target, "mrtsword.war"
-set :deploy_to, "/dpr2/apps/sword39001"
+set :application, "merritt-store"
+set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/prod/storage.war"
+set :target, "storage.war"
+set :deploy_to, "/dpr2store/apps/storage35121"
 
-set :tomcat_pid, "#{fetch(:deploy_to)}/sword.pid"
+set :tomcat_pid, "#{fetch(:deploy_to)}/storage.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-set :mrtHomes, "/dpr2/mrtHomes/sword"
-set :info_file, "sword-info.txt"
-set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
+# additional directories needed by storage
+set :linked_dirs, fetch(:linked_dirs).push("webapps/container")
+
+set :mrtHomes, "/dpr2store/mrtHomes/store"
+set :info_file, "store-info.txt"
+set :mrtHomes_files, ["store-info.txt", "nodes.txt"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
-server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
 
+server "uc3-mrtstore02x2-prd.cdlib.org", user: "dpr2store", roles: %w{web app mrtHomes}
 
+# custom
 namespace :custom do
-  desc 'Custom deploy action`'
+
+  desc 'Custom deploy action'
   task :deploy_bits do
     on roles(:app) do
         puts "Add source code version to Tomcat directory"
-        execute "/usr/bin/curl --silent -X GET  https://api.github.com/repos/cdluc3/mrt-sword/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2/apps/sword39001/version"
+        execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-store/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> /dpr2store/apps/storage35121/version"
     end
   end
 
   desc 'Custom pre-stop action'
   task :prestop do
     on roles(:app) do
-        puts "No custom pre-stop actions"
+        puts "No custom prestop action"
     end
   end
 
   desc 'Custom post-start action'
   task :poststart do
     on roles(:app) do
-        puts "No custom post-start actions"
+        puts "No custom poststart action"
     end
   end
-
 end

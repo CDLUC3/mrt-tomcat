@@ -28,10 +28,12 @@ set :deploy_to, "/dpr2/apps/oai37001"
 set :tomcat_pid, "#{fetch(:deploy_to)}/oai.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
-server "uc3-mrtoai01x2-stg", user: "dpr2", roles: %w{web app}
+set :mrtHomes, "/dpr2/mrtHomes/oai"
+set :mrtHomes_files, ["oai-info.txt"]
+set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
 
-# custom
-set :ingestqueue, "/dpr2/ingest_home/queue"
+server "uc3-mrtoai01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
+
 
 namespace :custom do
   desc 'Custom deploy action`'
