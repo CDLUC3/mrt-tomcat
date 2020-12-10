@@ -14,16 +14,14 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
-set :rails_env, "mrt-store01x2-stg"
+set :rails_env, "uc3-mrt-access-stg"
 
-puts "----- mrt-store01x2-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
+puts "----- uc3-mrt-access-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
-set :branch, "mrt-store01x2-stg"
+set :branch, "uc3-mrt-access-stg"
 
 set :application, "merritt-store"
-# Do not define, Capistrano will prompt at build time
 set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/stage/storage.war"
-
 set :target, "storage.war"
 set :deploy_to, "/dpr2store/apps/storage35121"
 
@@ -33,8 +31,7 @@ set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 # additional directories needed by storage
 set :linked_dirs, fetch(:linked_dirs).push("webapps/container")
 
-# server "mrt-inv-aws-stg.cdlib.org", user: "dpr2", roles: %w{web app}
-server "uc3-mrtstore01x2-stg.cdlib.org", user: "dpr2store", roles: %w{web app}
+server "localhost", user: "dpr2store", roles: %w{web app}
 
 # custom
 namespace :custom do
