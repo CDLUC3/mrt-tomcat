@@ -21,7 +21,7 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-ingest02x2-prd"
 
 set :application, "merritt-ingest"
-set :build_url, "http://builds.cdlib.org/job/mrt-ingest-stage/lastSuccessfulBuild/artifact/batch-war/target/mrt-ingestwar-1.0-SNAPSHOT.war"
+set :build_url, "http://builds.cdlib.org/job/mrt-ingest-stage/lastSuccessfulBuild/artifact/ingest-war/target/mrt-ingestwar-1.0-SNAPSHOT.war"
 set :target, "ingest.war"
 set :deploy_to, "/dpr2/apps/ingest33121"
 
