@@ -1,5 +1,0 @@
-
-Check out from git repo: https://github.com/CDLUC3/mrt-tomcat
-
-Usage: cap <target> <action>
-e.g.   cap mrt-ingest-local deploy:stop
