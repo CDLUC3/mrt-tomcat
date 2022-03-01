@@ -21,7 +21,7 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "uc3-mrt-audit-stg"
 
 set :application, "merritt-audit"
-set :build_url, "http://builds.cdlib.org/userContent/mrt-audit/mrt-audit.#{fetch(:semantic_version)}.war"
+set :build_url, "http://builds.cdlib.org/userContent/mrt-audit/mrt-audit-#{fetch(:semantic_version)}.war"
 
 set :target, "mrtaudit.war"
 set :deploy_to, "/dpr2/apps/audit37001"
