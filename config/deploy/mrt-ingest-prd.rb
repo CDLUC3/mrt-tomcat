@@ -15,7 +15,7 @@
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-ingest-prd"
-< set :semantic_version, ENV['MERRITT_INGEST_RELEASE'] || 'undefined'
+set :semantic_version, ENV['MERRITT_INGEST_RELEASE'] || 'undefined'
 puts "----- mrt-ingest-prd branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-ingest-prd"
