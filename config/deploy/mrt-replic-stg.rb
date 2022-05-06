@@ -15,6 +15,7 @@
 # extended properties on the server.
 # ---- Needed for non-rails deployment???
 set :rails_env, "mrt-replic-stg"
+set :semantic_version, ENV['MERRITT_REPLIC_RELEASE'] || 'undefined'
 
 puts "----- mrt-replic-stg branch of https://github.com/CDLUC3/tomcat8_catalina_base -----"
 set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
@@ -22,7 +23,7 @@ set :branch, "mrt-replic-stg"
 
 set :application, "merritt-replic"
 # Do not define, Capistrano will prompt at build time
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-replic/ws/replication-war/war/stage/mrtreplic.war" 
+set :build_url, "http://builds.cdlib.org/userContent/mrt-replic/mrt-replic-#{fetch(:semantic_version)}.war"
 set :target, "mrtreplic.war"
 set :deploy_to, "/dpr2/apps/replic38001"
 
