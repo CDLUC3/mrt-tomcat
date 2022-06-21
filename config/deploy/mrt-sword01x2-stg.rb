@@ -32,7 +32,8 @@ set :mrtHomes, "/dpr2/mrtHomes/sword"
 set :info_file, "sword-info.txt"
 set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
-server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app mrtHomes}
+# stop managing content in mrtHomes (a.g. june 15 2022)
+server "uc3-mrtsword01x2-stg", user: "dpr2", roles: %w{web app}
 
 
 namespace :custom do
