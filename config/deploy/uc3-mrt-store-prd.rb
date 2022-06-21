@@ -21,7 +21,9 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "uc3-mrt-store-prd"
 
 set :application, "merritt-store"
-set :build_url,   "http://builds.cdlib.org/view/Merritt/job/mrt-store-pub/ws/store-war/war/prod/storage.war"
+set :semantic_version, ENV['MERRITT_STORE_RELEASE'] || 'undefined'
+set :build_url, "http://builds.cdlib.org/userContent/mrt-store/mrt-store-#{fetch(:semantic_version)}.war"
+
 set :target, "storage.war"
 set :deploy_to, "/dpr2store/apps/storage35121"
 
