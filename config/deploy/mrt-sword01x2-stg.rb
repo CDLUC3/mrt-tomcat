@@ -22,7 +22,7 @@ set :branch, "mrt-sword01x2-stg"
 
 set :application, "merritt-sword"
 set :semantic_version, ENV['MERRITT_SWORD_RELEASE'] || 'undefined'
-set :build_url, "http://builds.cdlib.org/userContent/mrt-sword/mrt-store-#{fetch(:semantic_version)}.war"
+set :build_url, "http://builds.cdlib.org/userContent/mrt-sword/mrt-sword-#{fetch(:semantic_version)}.war"
 set :target, "mrtsword.war"
 set :deploy_to, "/dpr2/apps/sword39001"
 
