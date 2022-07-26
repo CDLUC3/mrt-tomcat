@@ -21,7 +21,8 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-sword01x2-prd"
 
 set :application, "merritt-sword"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-sword/ws/sword-war/war/prod/mrtsword.war"
+set :semantic_version, ENV['MERRITT_SWORD_RELEASE'] || 'undefined'
+set :build_url, "http://builds.cdlib.org/userContent/mrt-sword/mrt-sword-#{fetch(:semantic_version)}.war"
 set :target, "mrtsword.war"
 set :deploy_to, "/dpr2/apps/sword39001"
 
@@ -32,7 +33,6 @@ set :mrtHomes, "/dpr2/mrtHomes/sword"
 set :info_file, "sword-info.txt"
 set :mrtHomes_files, ["sword-info.txt", "jssecacert"]
 set :mrtHomes_data, "data/mrtHomes/#{fetch(:rails_env)}"
-# stop managing content in mrtHomes (a.g. june 15 2022)
 server "uc3-mrtsword01x2-prd", user: "dpr2", roles: %w{web app}
 
 
