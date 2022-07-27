@@ -21,7 +21,9 @@ set :repo_url, "https://github.com/CDLUC3/tomcat8_catalina_base"
 set :branch, "mrt-oai01x2-prd"
 
 set :application, "merritt-oai"
-set :build_url, "http://builds.cdlib.org/view/Merritt/job/mrt-build-oai/ws/oai-war/war/prod/mrtoai.war"
+set :semantic_version, ENV['MERRITT_OAI_RELEASE'] || 'undefined'
+set :build_url, "http://builds.cdlib.org/userContent/mrt-oai/mrt-oai-#{fetch(:semantic_version)}.war"
+
 set :target, "mrtoai.war"
 set :deploy_to, "/dpr2/apps/oai37001"
 
