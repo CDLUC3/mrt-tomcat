@@ -8,10 +8,10 @@ lock '>= 3.4.0'
 # set :deploy_to, '/dpr2/apps/ingest33121/tomcat'
 set :scm, :git
 
-set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
-		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
-		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd",
-                "mrt-replic-dev"]
+#set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
+#		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
+#		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd",
+#                "mrt-replic-dev"]
 set :default_env, { path: "/dpr2/local/bin:$PATH" }
 
 # persistent dirs
@@ -92,19 +92,6 @@ namespace :deploy do
     on roles(:app) do
       execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
       execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
-      invoke "deploy:init_mrtHomes"
-    end
-  end
-
-  # eventually this will be part of the 'apps' role. but currently only
-  # a few servers are set up for this. (ag 20200506)
-  desc 'Initial mrtHomes setup'
-  task :init_mrtHomes do
-    on roles(:mrtHomes) do
-      execute "[ -d #{fetch(:mrtHomes)}/log ] || mkdir -p #{fetch(:mrtHomes)}/log;"
-      fetch(:mrtHomes_files).each do |file|
-        upload!  "#{fetch(:mrtHomes_data)}/#{file}", "#{fetch(:mrtHomes)}/"
-      end
     end
   end
 

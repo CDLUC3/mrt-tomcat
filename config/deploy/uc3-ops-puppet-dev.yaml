@@ -11,6 +11,9 @@ set :build_url, "http://builds.cdlib.org/userContent/mrt-audit/mrt-audit-#{fetch
 set :tomcat_pid, "#{fetch(:deploy_to)}/audit.pid"
 set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 
+# now using puppet to manage tomcat configs.  add tomcat conf and bin dirs to shared area.
+set :linked_dirs, %w{logs temp work conf bin}
+
 
 server "localhost", user: "#{fetch(:user)}", roles: %w{web app}
 
