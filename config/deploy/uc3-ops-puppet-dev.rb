@@ -2,8 +2,10 @@
 set :rails_env, "uc3-ops-puppet-dev"
 set :application, "merritt-audit"
 set :subservice, "audit37001"
-set :user, "dpr2"
-set :home_dir, "/apps/dpr2"
+#set :user, "dpr2"
+set :user, "uc3adm"
+#set :home_dir, "/apps/dpr2"
+set :home_dir, "/apps/uc3adm"
 set :deploy_to, "#{fetch(:home_dir)}/apps/#{fetch(:subservice)}"
 set :target, "mrtaudit.war"
 set :semantic_version, ENV['MERRITT_SUBSERVICE_RELEASE'] || 'undefined'
