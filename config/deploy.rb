@@ -1,13 +1,6 @@
 # config valid only for Capistrano 3.1
 lock '>= 3.4.0'
 
-# Instance specific variables set in deploy/ directory
-# set :application, 'merritt-ingest'
-# set :repo_url, 'https://hg.cdlib.org/mrt-ingest'
-# set :build_url, 'http://builds.cdlib.org/job/mrt-ingest-dev/lastSuccessfulBuild/artifact/batch-war/target/mrt-ingestwar-1.0-SNAPSHOT.war'
-# set :deploy_to, '/dpr2/apps/ingest33121/tomcat'
-set :scm, :git
-
 #set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
 #		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
 #		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd",
