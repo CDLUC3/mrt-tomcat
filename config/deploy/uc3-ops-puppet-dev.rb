@@ -1,6 +1,9 @@
 # ---- Needed for non-rails deployment???
 set :rails_env, "uc3-ops-puppet-dev"
 set :application, "merritt-audit"
+set :repo_url,         ENV['REPO_URL']        || 'https://github.com/cdluc3/mrt-tomcat.git'
+set :branch,           ENV['BRANCH']          || 'capistrano_refactor'
+
 set :subservice, "audit37001"
 #set :user, "dpr2"
 set :user, "uc3adm"
