@@ -1,5 +1,5 @@
-# ---- Needed for non-rails deployment???
 set :rails_env, "uc3-ops-puppet-dev"
+# ???? is :application actually used anywhere?
 set :application, "merritt-audit"
 set :repo_url,         ENV['REPO_URL']        || 'https://github.com/cdluc3/mrt-tomcat.git'
 set :branch,           ENV['BRANCH']          || 'capistrano_refactor'
@@ -29,7 +29,7 @@ namespace :custom do
     on roles(:app) do
         puts "Add source code version to Tomcat directory"
         execute "/usr/bin/curl --silent -X GET https://api.github.com/repos/cdluc3/mrt-audit/commits | /bin/fgrep 'sha' | /usr/bin/head -1 >> #{fetch(:deploy_to)}/version"
-        # can this simply use ':semantic_version'?
+        # ???? can this simply use ':semantic_version'?
         #execute "/usr/bin/echo #{fetch(:semantic_version)} > #{fetch(:deploy_to)}/version"
     end
   end
