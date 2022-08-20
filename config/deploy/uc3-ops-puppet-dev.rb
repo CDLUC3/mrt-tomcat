@@ -4,7 +4,8 @@ set :application, "merritt-audit"
 set :repo_url,         ENV['REPO_URL']        || 'https://github.com/cdluc3/mrt-tomcat.git'
 set :branch,           ENV['BRANCH']          || 'capistrano_refactor'
 
-set :subservice, "audit37001"
+#set :subservice, "audit37001"
+set :subservice, "audit"
 #set :user, "dpr2"
 set :user, "uc3adm"
 #set :home_dir, "/apps/dpr2"
