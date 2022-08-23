@@ -31,7 +31,8 @@ set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
 server "localhost", user: "dpr2", roles: %w{web app}
 
 # custom
-set :ingestqueue, "/dpr2/ingest_home/queue"
+# set :ingestqueue, "/dpr2/ingest_home/queue"
+set :ingestqueue, "/apps/ingest-prd-zfs/ingest_home/queue"
 
 namespace :custom do
   desc 'Custom deploy action`'
