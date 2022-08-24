@@ -1,66 +1,20 @@
-# config valid only for Capistrano 3.1
-lock '>= 3.4.0'
-
-#set :stages, ["mrt-ingest-local", "mrt-ingest-dev", "mrt-ingest-stg", "mrt-ingest-prd", 
-#		"mrt-inv-dev", "mrt-inv-stg", "mrt-inv-prd",
-#		"mrt-store-dev", "mrt-store-stg", "mrt-store-prd",
-#                "mrt-replic-dev"]
-set :default_env, { path: "/dpr2/local/bin:$PATH" }
+#lock '>= 3.17.0'
 
 # persistent dirs
-# set :linked_files, %w{webapps/tomcat.pid}
-set :linked_dirs, %w{logs temp work}
+# now using puppet to manage tomcat configs, so add tomcat conf and bin dirs to shared area.
+set :linked_dirs, %w{logs temp work conf bin}
 set :tmp_dir, "/tmp"
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-
-# Default value for :format is :pretty
-# set :format, :pretty
-
-# Default value for :log_level is :debug
-# set :log_level, :debug
-
-# Default value for :pty is false
-# set :pty, true
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
 namespace :deploy do
 
-  desc 'Stop Tomcat'
-  task :stop do
-    on roles(:app), in: :sequence, wait: 5 do
-      if test("[ -f #{fetch(:tomcat_pid)} ]")
-        invoke 'custom:prestop'
-        execute "cd #{fetch(:deploy_to)}/tomcat; /bin/sh ./bin/stop"
-      end
-    end
-  end
-
-  desc 'Start Tomcat'
-  task :start do
-    on roles(:app), wait: 10 do
-      execute "cd #{fetch(:deploy_to)}/tomcat; /bin/sh ./bin/start"
-      invoke 'custom:poststart'
-    end
-  end
-
-  desc 'Status Tomcat'
-  task :status do
-    on roles(:app) do
-      if test("[ -f #{fetch(:tomcat_pid)} ]")
-        execute "cd #{fetch(:deploy_to)}/current; cat #{fetch(:tomcat_pid)} | xargs ps -lp"
-      end
-    end
-  end
-
-  desc 'Download Tomcat'
+  desc 'Download WAR File'
   task :download_bits do
     on roles(:app) do
       execute "cd #{fetch(:deploy_to)}"
-      # execute "[ -f #{fetch(:tmp_dir)}/#{fetch(:target)} ] && rm -f #{deploy_to}/temp/#{fetch(:target});"
       set :build_url, ask('Enter Jenkins artifact URL: ', 'http://builds.cdlib.org/...') unless fetch(:build_url)
       execute "curl --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} '#{fetch(:build_url)}' || exit 1;"
     end
@@ -68,7 +22,7 @@ namespace :deploy do
   after "deploy", "deploy:download_bits"
   before "deploy:download_bits", "init_deploy"
 
-  desc 'Deploy Tomcat'
+  desc 'Deploy WAR File'
   task :deploy_bits do
     on roles(:app) do
       execute "cd #{fetch(:deploy_to)}"
