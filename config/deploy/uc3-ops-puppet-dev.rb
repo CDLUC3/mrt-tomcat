@@ -1,7 +1,7 @@
 #set :application, "merritt-audit"
 set :rails_env,        ENV['RAILS_ENVIRONMENT']        || 'uc3-ops-puppet-dev'
-set :cap_repo_url,     ENV['CAP_REPO_URL']             || 'https://github.com/cdluc3/mrt-tomcat.git'
-set :cap_repo_branch,  ENV['CAP_REPO_BRANCH']          || 'main'
+set :repo_url,         ENV['CAP_REPO_URL']             || 'https://github.com/cdluc3/mrt-tomcat.git'
+set :branch,           ENV['CAP_REPO_BRANCH']          || 'main'
 set :user,             ENV['USER']                     || 'dpr2'
 set :group,            ENV['GROUP']                    || 'dpr2'
 set :home_dir,         ENV['HOME']                     || '/apps/dpr2'
