@@ -1,7 +1,7 @@
 #lock '>= 3.17.0'
 
 # persistent dirs
-# now using puppet to manage tomcat configs, so add tomcat conf and bin dirs to shared area.
+# now using puppet to manage tomcat configs, so add tomcat conf/ and bin/ dirs to shared area.
 set :linked_dirs, %w{logs temp work conf bin}
 set :tmp_dir, "/tmp"
 
