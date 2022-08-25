@@ -8,7 +8,7 @@ set :home_dir,         ENV['HOME']                     || "/apps/#{fetch(:user)}
 set :service,          ENV['MERRITT_SERVICE']          || 'undefined'
 set :semantic_version, ENV['MERRITT_SERVICE_RELEASE']  || 'undefined'
 set :artifact_url,     ENV['ARTIFACT_URL']             || 'undefined'
-set :artifact_name,    ENV['ARTIFACT_NAME']            || "#{fetch(:service)}-#{fetch(:semantic_version)}.war"
+set :artifact_name,    ENV['ARTIFACT_NAME']            || 'undefined'
 
 set :target, "#{fetch(:artifact_name)}"
 set :build_url, "#{fetch(:artifact_url)}"
