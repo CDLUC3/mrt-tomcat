@@ -5,15 +5,9 @@
 set :linked_dirs, %w{logs temp work conf bin}
 set :tmp_dir, "/tmp"
 
-
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-# 
-set :target, "#{fetch(:artifact_name)}"
-set :build_url, "#{fetch(:artifact_url)}"
-set :deploy_to, "#{fetch(:home_dir)}/apps/#{fetch(:service)}"
-set :timestamp, -> { `/usr/bin/date +"%Y%m%d-%H.%M.%S"`.chomp }
 
 namespace :deploy do
 
