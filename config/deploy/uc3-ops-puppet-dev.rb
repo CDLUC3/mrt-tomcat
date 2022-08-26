@@ -21,7 +21,7 @@ namespace :custom do
   task :deploy_bits do
     on roles(:app) do
       puts "Log deployment time and semantic version to Tomcat directory"
-      execute "/usr/bin/echo #{fetch(:timestamp)}    #{fetch(:semantic_version)} >> #{fetch(:deploy_to)}/deployment_log"
+      execute "/usr/bin/echo \"#{fetch(:timestamp)}\t#{fetch(:semantic_version)}\" >> #{fetch(:deploy_to)}/deployment_log"
     end
   end
 
