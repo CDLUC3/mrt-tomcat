@@ -13,16 +13,15 @@ set :artifact_name,    ENV['ARTIFACT_NAME']            || 'undefined'
 set :target, "#{fetch(:artifact_name)}"
 set :build_url, "#{fetch(:artifact_url)}"
 set :deploy_to, "#{fetch(:home_dir)}/apps/#{fetch(:service)}"
-#set :tomcat_pid, "#{fetch(:deploy_to)}/audit.pid"
-#set :tomcat_log, "#{fetch(:deploy_to)}/shared/log/tomcat.log"
+set :timestamp, -> { `/usr/bin/date +"%Y%m%d-%H.%M.%S"`.chomp }
 server "localhost", user: "#{fetch(:user)}", roles: %w{web app}
 
 namespace :custom do
   desc 'Custom deploy action`'
   task :deploy_bits do
     on roles(:app) do
-      puts "Add source code version to Tomcat directory"
-      execute "/usr/bin/echo #{fetch(:semantic_version)} >> #{fetch(:deploy_to)}/version"
+      puts "Log deployment time and semantic version to Tomcat directory"
+      execute "/usr/bin/echo #{fetch(:timestamp)}    #{fetch(:semantic_version)} >> #{fetch(:deploy_to)}/deployment_log"
     end
   end
 
