@@ -9,6 +9,12 @@ set :tmp_dir, "/tmp"
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+# 
+set :target, "#{fetch(:artifact_name)}"
+set :build_url, "#{fetch(:artifact_url)}"
+set :deploy_to, "#{fetch(:home_dir)}/apps/#{fetch(:service)}"
+set :timestamp, -> { `/usr/bin/date +"%Y%m%d-%H.%M.%S"`.chomp }
+
 namespace :deploy do
 
   desc 'Download WAR File'
@@ -33,6 +39,17 @@ namespace :deploy do
   end
   after "deploy:download_bits", "deploy:deploy_bits"
   before "deploy:deploy_bits", "init_deploy"
+
+  desc 'Update Deployment Log'
+  task :deploy_log do
+    on roles(:app) do
+      puts "Log deployment time and semantic version to Tomcat directory"
+      execute "/usr/bin/echo \"#{fetch(:timestamp)}\t#{fetch(:semantic_version)}\" >> #{fetch(:deploy_to)}/deployment_log"
+    end
+  end
+  after "deploy:deploy_bits", "deploy:deploy_log"
+  before "deploy:deploy_log", "init_deploy"
+
 
   desc 'Initial Deploy Tomcat'
   task :init_deploy do
