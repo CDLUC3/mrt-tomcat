@@ -1,4 +1,4 @@
-# Default mrt-uc3-tomcat deployement config.
+# uc3-mrt-store deployment config.
 #
 set :rails_env,        ENV['RAILS_ENVIRONMENT']        || 'undefined'
 set :repo_url,         ENV['CAP_REPO_URL']             || 'https://github.com/cdluc3/mrt-tomcat.git'
@@ -15,6 +15,9 @@ set :target, "#{fetch(:artifact_name)}"
 set :build_url, "#{fetch(:artifact_url)}"
 set :deploy_to, "#{fetch(:home_dir)}/apps/#{fetch(:service)}"
 server "localhost", user: "#{fetch(:user)}", roles: %w{app}
+
+# additional directories needed by storage
+set :linked_dirs, fetch(:linked_dirs).push("webapps/container")
 
 # hook to capture subservice specific tasks
 #

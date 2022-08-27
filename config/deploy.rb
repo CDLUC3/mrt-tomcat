@@ -38,6 +38,7 @@ namespace :deploy do
   task :deploy_log do
     on roles(:app) do
       puts "Log deployment time and semantic version to Tomcat directory"
+      set :timestamp, -> { `/usr/bin/date +"%Y%m%d-%H.%M.%S"`.chomp }
       execute "/usr/bin/echo \"#{fetch(:timestamp)}\t#{fetch(:semantic_version)}\" >> #{fetch(:deploy_to)}/deployment_log"
     end
   end
