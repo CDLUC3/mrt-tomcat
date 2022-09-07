@@ -1,4 +1,4 @@
-#lock '>= 3.17.0'
+lock '>= 3.17.1'
 
 # persistent dirs
 # now using puppet to manage tomcat configs, so add tomcat conf/ and bin/ dirs to shared area.

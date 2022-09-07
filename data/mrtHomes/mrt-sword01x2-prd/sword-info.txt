@@ -1,9 +1,0 @@
-maxUploadSize=100000000000
-jssecacert=/dpr2/mrtHomes/sword/jssecacert
-ldapHost=uc3-ldap.cdlib.org:1636
-link=http://merritt.cdlib.org/sword/v2/object/
-editmedia=http://merritt.cdlib.org/d/
-edit=http://mrtsword.cdlib.org:39001/mrtsword/edit/
-ingestUrlAdd=http://ingest.cdlib.org:33121/ingest/submit-object
-ingestUrlUpdate=http://ingest.cdlib.org:33121/ingest/update-object
-retainTargetUrl=true
