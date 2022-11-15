@@ -16,7 +16,7 @@ namespace :deploy do
     on roles(:app) do
       execute "cd #{fetch(:deploy_to)}"
       set :build_url, ask('Enter Jenkins artifact URL: ', 'http://builds.cdlib.org/...') unless fetch(:build_url)
-      execute "curl --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} '#{fetch(:build_url)}' || exit 1;"
+      execute "curl --fail --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} '#{fetch(:build_url)}' || exit 1;"
     end
   end
   after "deploy", "deploy:download_bits"
