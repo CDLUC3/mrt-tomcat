@@ -11,6 +11,14 @@ set :keep_releases, 5
 
 namespace :deploy do
 
+  desc 'Initialize CATALINA_HOME'
+  task :init_catalina_home do
+    on roles(:app) do
+      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
+    end
+  end
+  after "git:check", "deploy:init_catalina_home"
+
   desc 'Download WAR File'
   task :download_bits do
     on roles(:app) do
@@ -20,17 +28,14 @@ namespace :deploy do
     end
   end
   after "deploy:check:linked_dirs", "deploy:download_bits"
-  before "deploy:download_bits", "git:clone"
 
-  desc 'Initial Deploy Tomcat'
-  task :init_deploy do
+  desc 'Symlink tomcat to current'
+  task :symlink_tomcat do
     on roles(:app) do
-      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
       execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
     end
   end
-  after "deploy:log_revision", "deploy:init_deploy"
-  before "deploy:init_deploy", "deploy_bits"
+  after "deploy:log_revision", "deploy:symlink_tomcat"
 
   desc 'Deploy WAR File'
   task :deploy_bits do
@@ -41,8 +46,7 @@ namespace :deploy do
       execute "mv -f #{fetch(:tmp_dir)}/#{fetch(:target)} #{fetch(:deploy_to)}/current/webapps || exit 1;"
     end
   end
-  after "deploy:init_deploy", "deploy:deploy_bits"
-  before "deploy:deploy_bits", "deploy_log"
+  after "deploy:symlink_tomcat", "deploy:deploy_bits"
 
   desc 'Update Deployment Log'
   task :deploy_log do
@@ -53,6 +57,5 @@ namespace :deploy do
     end
   end
   after "deploy:deploy_bits", "deploy:deploy_log"
-
 
 end
