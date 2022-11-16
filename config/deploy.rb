@@ -19,8 +19,18 @@ namespace :deploy do
       execute "curl --fail --location --silent --output #{fetch(:tmp_dir)}/#{fetch(:target)} '#{fetch(:build_url)}' || exit 1;"
     end
   end
-  after "deploy", "deploy:download_bits"
-  before "deploy:download_bits", "init_deploy"
+  after "deploy:check:linked_dirs", "deploy:download_bits"
+  before "deploy:download_bits", "git:clone"
+
+  desc 'Initial Deploy Tomcat'
+  task :init_deploy do
+    on roles(:app) do
+      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
+      execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
+    end
+  end
+  after "deploy:log_revision", "deploy:init_deploy"
+  before "deploy:init_deploy", "deploy_bits"
 
   desc 'Deploy WAR File'
   task :deploy_bits do
@@ -31,8 +41,8 @@ namespace :deploy do
       execute "mv -f #{fetch(:tmp_dir)}/#{fetch(:target)} #{fetch(:deploy_to)}/current/webapps || exit 1;"
     end
   end
-  after "deploy:download_bits", "deploy:deploy_bits"
-  before "deploy:deploy_bits", "init_deploy"
+  after "deploy:init_deploy", "deploy:deploy_bits"
+  before "deploy:deploy_bits", "deploy_log"
 
   desc 'Update Deployment Log'
   task :deploy_log do
@@ -43,15 +53,6 @@ namespace :deploy do
     end
   end
   after "deploy:deploy_bits", "deploy:deploy_log"
-  before "deploy:deploy_log", "init_deploy"
 
-
-  desc 'Initial Deploy Tomcat'
-  task :init_deploy do
-    on roles(:app) do
-      execute "[ ! -f #{fetch(:deploy_to)} ] && mkdir -p #{fetch(:deploy_to)};"
-      execute "[ ! -f #{fetch(:deploy_to)}/current ] && cd #{fetch(:deploy_to)}; ln -s current tomcat;"
-    end
-  end
 
 end
